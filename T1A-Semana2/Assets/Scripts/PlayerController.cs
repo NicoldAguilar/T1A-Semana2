@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour
         {
             ChangeAnimation(ANIMATION_ATACAR);
         }
+
         //Añadir fuerza para el salto
         if (Input.GetKeyUp(KeyCode.Space) && saltos)
         {
