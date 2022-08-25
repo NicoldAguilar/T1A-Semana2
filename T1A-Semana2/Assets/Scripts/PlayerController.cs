@@ -31,12 +31,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Atacar 
+        if (Input.GetKey(KeyCode.Z))
+        {
+            ChangeAnimation(ANIMATION_ATACAR);
+        }
+
         gravedad.velocity = new Vector2(0, gravedad.velocity.y);
         ChangeAnimation(ANIMATION_QUIETO);
-        saltos = true;
 
-        //rb.velocity.x:
-        //rb.velocity.y:
         if (Input.GetKey(KeyCode.RightArrow))
         {
             gravedad.velocity = new Vector2(velocity, gravedad.velocity.y);
@@ -51,17 +54,17 @@ public class PlayerController : MonoBehaviour
         }
         if(Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.X))
         {
-            gravedad.velocity = new Vector2(velocity, gravedad.velocity.y);
+            gravedad.velocity = new Vector2((velocity+2), gravedad.velocity.y);
             renderi.flipX = false;
             ChangeAnimation(ANIMATION_CORRER);
         }
         if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.X))
         {
-            gravedad.velocity = new Vector2(-velocity, gravedad.velocity.y);
+            gravedad.velocity = new Vector2((-velocity-2), gravedad.velocity.y);
             renderi.flipX = true;
             ChangeAnimation(ANIMATION_CORRER);
         }
-        //Atacar 
+
         if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.Z))
         {
             ChangeAnimation(ANIMATION_ATACAR);
@@ -78,6 +81,11 @@ public class PlayerController : MonoBehaviour
             saltos = false; //salta una vez
             
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        saltos = true;
     }
 
     private void ChangeAnimation(int animation)
