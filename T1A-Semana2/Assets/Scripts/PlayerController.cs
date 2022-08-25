@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         gravedad.velocity = new Vector2(0, gravedad.velocity.y);
         ChangeAnimation(ANIMATION_QUIETO);
+        saltos = true;
 
         //rb.velocity.x:
         //rb.velocity.y:
@@ -62,6 +63,10 @@ public class PlayerController : MonoBehaviour
         }
         //Atacar 
         if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.Z))
+        {
+            ChangeAnimation(ANIMATION_ATACAR);
+        }
+        if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.Z))
         {
             ChangeAnimation(ANIMATION_ATACAR);
         }
