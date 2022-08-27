@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float velocity = 5, jumpForce = 3;
+    public float velocity = 5, jumpForce = 3, aceleracion =2;
 
     Rigidbody2D gravedad;
     SpriteRenderer renderi;
@@ -31,12 +31,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Atacar 
-        if (Input.GetKey(KeyCode.Z))
-        {
-            ChangeAnimation(ANIMATION_ATACAR);
-        }
-
         gravedad.velocity = new Vector2(0, gravedad.velocity.y);
         ChangeAnimation(ANIMATION_QUIETO);
 
@@ -54,33 +48,38 @@ public class PlayerController : MonoBehaviour
         }
         if(Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.X))
         {
-            gravedad.velocity = new Vector2((velocity+2), gravedad.velocity.y);
+            gravedad.velocity = new Vector2((velocity+aceleracion), gravedad.velocity.y);
             renderi.flipX = false;
             ChangeAnimation(ANIMATION_CORRER);
         }
         if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.X))
         {
-            gravedad.velocity = new Vector2((-velocity-2), gravedad.velocity.y);
+            gravedad.velocity = new Vector2((-velocity-aceleracion), gravedad.velocity.y);
             renderi.flipX = true;
             ChangeAnimation(ANIMATION_CORRER);
         }
 
-        if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.Z))
+        /*if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.Z))
         {
             ChangeAnimation(ANIMATION_ATACAR);
         }
         if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.Z))
         {
             ChangeAnimation(ANIMATION_ATACAR);
-        }
+        }*/
 
         //Añadir fuerza para el salto
         if (Input.GetKeyUp(KeyCode.Space) && saltos)
         {
-            gravedad.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse); //método recomendado
             ChangeAnimation(ANIMATION_SALTAR);
-            saltos = false; //salta una vez
-            
+            gravedad.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse); //método recomendado
+            saltos = false; //salta una vez         
+        }
+
+        //Atacar
+        if (Input.GetKey(KeyCode.Z))
+        {
+            ChangeAnimation(ANIMATION_ATACAR);
         }
     }
 
