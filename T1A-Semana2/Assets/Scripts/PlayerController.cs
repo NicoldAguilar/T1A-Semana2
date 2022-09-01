@@ -9,8 +9,10 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D gravedad;
     SpriteRenderer renderi;
     Animator animador;
+    Vector3 lastCheckpointPosition;
 
-    bool saltos;
+    bool saltos = true;
+    bool saltos2 = true;
 
     const int ANIMATION_QUIETO = 0;
     const int ANIMATION_CAMINAR = 1;
@@ -59,21 +61,22 @@ public class PlayerController : MonoBehaviour
             ChangeAnimation(ANIMATION_CORRER);
         }
 
-        /*if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.Z))
-        {
-            ChangeAnimation(ANIMATION_ATACAR);
-        }
-        if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.Z))
-        {
-            ChangeAnimation(ANIMATION_ATACAR);
-        }*/
-
         //Añadir fuerza para el salto
-        if (Input.GetKeyUp(KeyCode.Space) && saltos)
+        if (Input.GetKeyUp(KeyCode.Space) && saltos == true)
         {
-            ChangeAnimation(ANIMATION_SALTAR);
-            gravedad.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse); //método recomendado
-            saltos = false; //salta una vez         
+            if (saltos2 == false) //segunda vez
+            {
+                ChangeAnimation(ANIMATION_SALTAR);
+                gravedad.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse); //método recomendado
+                saltos = false; //salta una vez
+            }
+            else
+            {
+                ChangeAnimation(ANIMATION_SALTAR);
+                gravedad.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse); //método recomendado
+                
+            }
+            saltos2 = false;
         }
 
         //Atacar
@@ -86,6 +89,20 @@ public class PlayerController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         saltos = true;
+        saltos2 = true;
+        if (other.gameObject.tag == "DarkHole")
+        {
+            if (lastCheckpointPosition != null)
+            {
+                transform.position = lastCheckpointPosition;
+            }
+        }
+    }
+    
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Trigger funciona");
+        lastCheckpointPosition = transform.position; //guarda la ultima posición del trasform
     }
 
     private void ChangeAnimation(int animation)
