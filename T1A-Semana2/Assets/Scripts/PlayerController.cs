@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     bool saltos = true;
     bool saltos2 = true;
+    bool checkpointverif = true;
 
     const int ANIMATION_QUIETO = 0;
     const int ANIMATION_CAMINAR = 1;
@@ -67,14 +68,13 @@ public class PlayerController : MonoBehaviour
             if (saltos2 == false) //segunda vez
             {
                 ChangeAnimation(ANIMATION_SALTAR);
-                gravedad.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse); //método recomendado
+                gravedad.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse); 
                 saltos = false; //salta una vez
             }
             else
             {
                 ChangeAnimation(ANIMATION_SALTAR);
-                gravedad.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse); //método recomendado
-                
+                gravedad.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);                
             }
             saltos2 = false;
         }
@@ -101,8 +101,17 @@ public class PlayerController : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Trigger funciona");
-        lastCheckpointPosition = transform.position; //guarda la ultima posición del trasform
+        if(other.gameObject.name == "Checkpoint1" && checkpointverif == true)
+        {
+            Debug.Log("Checkpoint 1 funciona");
+            lastCheckpointPosition = transform.position;
+        }
+        else if (other.gameObject.name == "Checkpoint2")
+        {
+            Debug.Log("Checkpoint 2 funciona");
+            lastCheckpointPosition = transform.position;//guarda la ultima posición del trasform
+            checkpointverif = false;
+        }     
     }
 
     private void ChangeAnimation(int animation)
