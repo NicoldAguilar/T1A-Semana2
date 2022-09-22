@@ -48,7 +48,7 @@ public class PlayerNinjaFemController : MonoBehaviour
             transform.position = new Vector2((float)gameManager.tempx, (float)gameManager.tempy);
             guardado = true;
         }
-
+        //Acciones del ninja
         if (ninja == true)
         {           
             if (Input.GetKeyUp(KeyCode.X))
