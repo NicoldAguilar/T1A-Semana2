@@ -8,6 +8,9 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameManagerControllerNF : MonoBehaviour
 {
+    public const int SCENE_T1C = 2;
+
+
     public Text livesText;
     public Text balasText;
     public Text coinsText;
@@ -85,6 +88,24 @@ public class GameManagerControllerNF : MonoBehaviour
         
     }
 
+    public void empezarCero()
+    {
+        var filePath = Application.persistentDataPath + "/saveT2.dat";
+        FileStream file;
+        if (File.Exists(filePath)) file = File.OpenWrite(filePath);
+        else file = File.Create(filePath);
+
+        GameData data = new GameData();
+        data.Score = 0;
+        data.CoinsT1 = 0;
+        data.CoinsT2 = 0;
+        data.Balas = 10;
+        data.ax = 0;
+        data.ay = 0;
+        BinaryFormatter bf = new BinaryFormatter();
+        bf.Serialize(file, data);
+        file.Close();
+    }
     public void GuardarPosicionPartida(float x, float y)
     {
         tempx = x;

@@ -38,11 +38,13 @@ public class BulletControllerNF : MonoBehaviour
         
         if (other.gameObject.tag == "Enemigo")
         {
+            Destroy(this.gameObject); //Se destruye la bala
             Destroy(other.gameObject);
             gameManager.BalasRestantes(0);
             gameManager.GanaPuntos(10);
-            Destroy(this.gameObject); //Se destruye la bala
+            
         }
+        
     }
 }
 

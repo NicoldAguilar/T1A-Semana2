@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerNinjaFemController : MonoBehaviour
@@ -25,7 +26,7 @@ public class PlayerNinjaFemController : MonoBehaviour
 
     const int ANIMATION_CORRER = 1;
     const int ANIMATION_SALTAR = 2;
-    const int ANIMATION_MORIR = 3;
+    const int ANIMATION_MORIR = 3;    
 
     // Start is called before the first frame update
     void Start()
@@ -159,17 +160,21 @@ public class PlayerNinjaFemController : MonoBehaviour
             checkpointverif = false;
             var x = transform.position.x;
             var y = transform.position.y;
-            gameManager.GuardarPosicionPartida(x, y);
+            gameManager.GuardarPosicionPartida(x, y); //que aparezca en el ultimo checkpont guardado
             gameManager.SaveGame();
 
         }
-        /*lastCheckpointPosition = transform.position;
-        if(other.gameObject.name = "Checkpoint2")
+        //Cambiar escena
+        if(other.gameObject.name == "Caja")
         {
-            
-            posicionTemp = transform.position;
-            game
-        }*/
+            SceneManager.LoadScene(GameManagerControllerNF.SCENE_T1C);
+        }
+        //Resetear todo a 0
+        if(other.gameObject.name == "Cactus")
+        {
+            gameManager.empezarCero();
+            gameManager.LoadGame();
+        }
     }
 
     private void ChangeAnimation(int animation)
