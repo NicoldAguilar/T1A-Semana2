@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BulletControllerNF : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class BulletControllerNF : MonoBehaviour
 
     public float velocity = 20;
     float realVelocity;
+    
 
     private GameManagerControllerNF gameManager;
 
@@ -15,15 +17,17 @@ public class BulletControllerNF : MonoBehaviour
     {
         realVelocity = velocity;
     }
+    public void SetLeftDirection()
+    {
+        realVelocity = -velocity;
+    }
     // Start is called before the first frame update
     void Start()
     {
         gameManager = FindObjectOfType<GameManagerControllerNF>();
         rb = GetComponent<Rigidbody2D>();
-        //Destroy(this.gameObject, 3);
     }
 
-    // Update is called once per frame
     void Update()
     {
         rb.velocity = new Vector2(realVelocity, 0);
@@ -31,11 +35,13 @@ public class BulletControllerNF : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {       
-        //Destroy(this.gameObject); //Se destruye la bala
+        
         if (other.gameObject.tag == "Enemigo")
         {
             Destroy(other.gameObject);
-            gameManager.BalasRestantes(1);
+            gameManager.BalasRestantes(0);
+            gameManager.GanaPuntos(10);
+            Destroy(this.gameObject); //Se destruye la bala
         }
     }
 }

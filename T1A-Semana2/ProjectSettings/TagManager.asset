@@ -6,6 +6,9 @@ TagManager:
   tags:
   - DarkHole
   - Enemigo
+  - GoldCoin
+  - SilverCoin
+  - Limite
   layers:
   - Default
   - TransparentFX
