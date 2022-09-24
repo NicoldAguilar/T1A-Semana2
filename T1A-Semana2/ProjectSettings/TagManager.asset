@@ -9,6 +9,9 @@ TagManager:
   - GoldCoin
   - SilverCoin
   - Limite
+  - Disparo1
+  - Disparo2
+  - Disparo3
   layers:
   - Default
   - TransparentFX

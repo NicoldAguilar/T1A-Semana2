@@ -6,17 +6,14 @@ public class BulletControllerMM : MonoBehaviour
 {
     Rigidbody2D rb;
 
-    public float velocity = 20;
-    float realVelocity;
+    public float velocity = 20, realVelocity;
 
-    public void SetRightDirection()
+    public void SetDirection(bool verificar)
     {
-        realVelocity = velocity;
+        if(verificar == true) realVelocity = velocity;
+        if(verificar == false) realVelocity = -velocity;
     }
-    public void SetLeftDirection()
-    {
-        realVelocity = -velocity;
-    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,11 +27,9 @@ public class BulletControllerMM : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-
         if (other.gameObject.tag == "Enemigo")
-        {
-            Destroy(this.gameObject); //Se destruye la bala
-            Destroy(other.gameObject);
+        {        
+            Destroy(this.gameObject); //Se destruye la bala 
         }
     }
 }
