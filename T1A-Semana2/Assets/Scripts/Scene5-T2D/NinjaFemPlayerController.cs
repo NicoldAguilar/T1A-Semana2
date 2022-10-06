@@ -46,7 +46,7 @@ public class NinjaFemPlayerController : MonoBehaviour
         animador = GetComponent<Animator>();
         colider = GetComponent<Collider2D>();
         audioSource = GetComponent<AudioSource>();
-        gameManager.LoadGameT2();
+        //gameManager.LoadGameT2();
         texto.text = "Katana";
     }
 
@@ -120,23 +120,38 @@ public class NinjaFemPlayerController : MonoBehaviour
             Debug.Log("Checkpoint 2 funciona");
             lastCheckpointPosition = transform.position;//guarda la ultima posición del trasform
             checkpointverif = false;
-            var x = transform.position.x;
+            /*var x = transform.position.x;
             var y = transform.position.y;
-            gameManager.GuardarPosicionPartida(x, y); //que aparezca en el ultimo checkpont guardado
+            gameManager.GuardarPosicionPartida(x, y); //que aparezca en el ultimo checkpont guardado*/
             gameManager.SaveGameT2();
 
         }
-        //Cambiar escena
-        /*if (other.gameObject.name == "Caja")
+        else if(other.gameObject.name == "Checkpoint3")
         {
-            SceneManager.LoadScene(GameManagerControllerNF.SCENE_T1C);
+            Debug.Log("Checkpoint 3 funciona");
+            lastCheckpointPosition = transform.position;//guarda la ultima posición del trasform
+            checkpointverif = false;
+            var x = transform.position.x;
+            var y = transform.position.y;
+            gameManager.GuardarPosicionPartida(x, y); //que aparezca en el ultimo checkpont guardado
+        }
+        //Cambiar escena
+        if (other.gameObject.name == "Portal")
+        {
+            SceneManager.LoadScene(GameManagerT2D.SCENE_T1C);
+            gameManager.LoadGameT21();
+        }
+        if (other.gameObject.name == "FinGame")
+        {
+            SceneManager.LoadScene(GameManagerT2D.SCENE_GO);
+            gameManager.LoadGameT21();
         }
         //Resetear todo a 0
         if (other.gameObject.name == "Cactus")
         {
             gameManager.empezarCeroT2();
             gameManager.LoadGameT2();
-        }*/
+        }
     }
 
     public void AccionAtacar()

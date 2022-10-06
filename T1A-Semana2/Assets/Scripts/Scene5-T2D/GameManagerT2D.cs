@@ -10,8 +10,8 @@ using System.Diagnostics;
 
 public class GameManagerT2D : MonoBehaviour
 {
-    public const int SCENE_T1C = 2;
-
+    public const int SCENE_T1C = 6;
+    public const int SCENE_GO = 7;
 
     public Text livesText;
     public Text balasText;
@@ -40,7 +40,7 @@ public class GameManagerT2D : MonoBehaviour
     void Start()
     {
         balas = 10;
-        lives = 1;
+        lives = 3;
         coins = 0;
         coins2 = 0;
         score = 0;
@@ -98,6 +98,7 @@ public class GameManagerT2D : MonoBehaviour
         data.CoinsT1 = coins;
         data.CoinsT2 = coins2;
         data.Balas = balas;
+        data.Vidas = lives;
         data.ax = tempx;
         data.ay = tempy;
         BinaryFormatter bf = new BinaryFormatter();
@@ -120,6 +121,8 @@ public class GameManagerT2D : MonoBehaviour
 
         UnityEngine.Debug.Log(data.Score);
         //Para llamar a los datos guardados
+        lives = data.Vidas;
+        PrintLivesInScreen();
         score = data.Score;
         PrintPuntosInScreen();
         coins = data.CoinsT1;
@@ -133,10 +136,37 @@ public class GameManagerT2D : MonoBehaviour
         UnityEngine.Debug.Log("Carga");
 
     }
+    public void LoadGameT21()
+    {
+        var filePath = Application.persistentDataPath + "/saveT2D.dat";
+        FileStream file;
+        if (File.Exists(filePath)) file = File.OpenRead(filePath);
+        else
+        {
+            UnityEngine.Debug.LogError("No se encontro el archivo");
+            return;
+        }
+        BinaryFormatter bf = new BinaryFormatter();
+        GameDataT2D data = (GameDataT2D)bf.Deserialize(file);
+        file.Close();
+
+        UnityEngine.Debug.Log(data.Score);
+        //Para llamar a los datos guardados
+        lives = data.Vidas;
+        PrintLivesInScreen();
+        score = data.Score;
+        PrintPuntosInScreen();
+        coins = data.CoinsT1;
+        PrintCoinsT1InScreen();
+        coins2 = data.CoinsT2;
+        PrintCoinsT2InScreen();
+        UnityEngine.Debug.Log("Carga");
+
+    }
 
     public void empezarCeroT2()
     {
-        var filePath = Application.persistentDataPath + "/saveT2.dat";
+        var filePath = Application.persistentDataPath + "/saveT2D.dat";
         FileStream file;
         if (File.Exists(filePath)) file = File.OpenWrite(filePath);
         else file = File.Create(filePath);
@@ -146,6 +176,7 @@ public class GameManagerT2D : MonoBehaviour
         data.CoinsT1 = 0;
         data.CoinsT2 = 0;
         data.Balas = 10;
+        data.Vidas = 3;
         data.ax = 0;
         data.ay = 0;
         BinaryFormatter bf = new BinaryFormatter();

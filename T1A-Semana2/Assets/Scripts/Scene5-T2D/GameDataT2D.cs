@@ -9,6 +9,7 @@ public class GameDataT2D
     public int CoinsT1 { get; set; }
     public int CoinsT2 { get; set; }
     public int Balas { get; set; }
+    public int Vidas { get; set; }
     public float ax { get; set; }
     public float ay { get; set; }
 }
