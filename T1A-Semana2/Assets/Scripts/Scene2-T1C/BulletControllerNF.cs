@@ -8,7 +8,7 @@ public class BulletControllerNF : MonoBehaviour
     Rigidbody2D rb;
 
     public float velocity = 20;
-    float realVelocity;
+    float realVelocity = 5;
     
 
     private GameManagerControllerNF gameManager;
@@ -38,13 +38,8 @@ public class BulletControllerNF : MonoBehaviour
         
         if (other.gameObject.tag == "Enemigo")
         {
-            Destroy(this.gameObject); //Se destruye la bala
-            Destroy(other.gameObject);
-            gameManager.BalasRestantes(0);
-            gameManager.GanaPuntos(10);
-            
-        }
-        
+            Destroy(this.gameObject); //Se destruye la bala           
+        }        
     }
 }
 

@@ -12,6 +12,8 @@ TagManager:
   - Disparo1
   - Disparo2
   - Disparo3
+  - Kunai
+  - Katana
   layers:
   - Default
   - TransparentFX

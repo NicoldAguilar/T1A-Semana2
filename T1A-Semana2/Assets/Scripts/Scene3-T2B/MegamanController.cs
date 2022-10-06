@@ -6,7 +6,7 @@ public class MegamanController : MonoBehaviour
 {
     public float velocity = 5, jumpForce = 3, tiempoCarga, segundos;
     public GameObject bulletT1, bulletT2, bulletT3, balaTemporal; 
-    bool saltos;
+    bool saltos, cambio=false;
 
     Rigidbody2D gravedad;
     SpriteRenderer renderi;
@@ -54,72 +54,81 @@ public class MegamanController : MonoBehaviour
             saltos = false; //salta una vez
         }
 
-        //Disparar
-        if (Input.GetKey(KeyCode.X))
+        DisparoContinuo();
+    }
+    public void DisparoContinuo()
+    {
+        if (cambio == true)
         {
+            //Disparar
             tiempoCarga += Time.deltaTime;
             segundos = Mathf.Floor(tiempoCarga % 66);
             if (segundos >= 0 && segundos < 3) renderi.color = new Color(0, 1, 1, 1); //CIAN
             if (segundos >= 3 && segundos < 5) renderi.color = new Color(1, 0, 1, 1); //MORADO
             if (segundos >= 5) renderi.color = new Color(1, 1, 0, 1); //AMARILLO
             Debug.Log("Tiempo: " + segundos);
-        }       
-
-        //Disparos en tipos:
-        if (Input.GetKeyUp(KeyCode.X))
-        {           
-            //Balas T1:
-            if (segundos >=0 && segundos < 3)
-            {
-                renderi.color = new Color(1, 1, 1, 1);
-                if (renderi.flipX == false)
-                {
-                    Disparos(1,true,bulletT1);
-                    ChangeAnimation(ANIMATION_DISPARAR);
-                }
-                else
-                {
-                    Disparos(-1, false, bulletT1);
-                    ChangeAnimation(ANIMATION_DISPARAR);
-                }
-                tiempoCarga = 0;
-                segundos = 0;
-            }
-            if (segundos >= 3 && segundos < 5)
-            {
-                renderi.color = new Color(1, 1, 1, 1);
-                if (renderi.flipX == false)
-                {
-                    Disparos(1, true, bulletT2);
-                    ChangeAnimation(ANIMATION_DISPARAR);
-                }
-                else
-                {
-                    Disparos(-1, false, bulletT2);
-                    ChangeAnimation(ANIMATION_DISPARAR);
-                }
-                tiempoCarga = 0;
-                segundos = 0;
-            }
-            if (segundos >= 5)
-            {
-                renderi.color = new Color(1, 1, 1, 1);
-                if (renderi.flipX == false)
-                {
-                    Disparos(1, true, bulletT3);
-                    ChangeAnimation(ANIMATION_DISPARAR);
-                }
-                else
-                {
-                    Disparos(-1, false, bulletT3);
-                    ChangeAnimation(ANIMATION_DISPARAR);
-                }
-                tiempoCarga = 0;
-                segundos = 0;
-            }
-        }        
+        }
+    }
+    public void Disparos() //getKey
+    {
+        cambio = true;
     }
 
+    public void DispararTipos() //getKeyUp
+    {
+        //Balas T1:
+        if (segundos >= 0 && segundos < 3)
+        {
+            renderi.color = new Color(1, 1, 1, 1);
+            if (renderi.flipX == false)
+            {
+                Disparos(1, true, bulletT1);
+                ChangeAnimation(ANIMATION_DISPARAR);
+            }
+            else
+            {
+                Disparos(-1, false, bulletT1);
+                ChangeAnimation(ANIMATION_DISPARAR);
+            }
+            tiempoCarga = 0;
+            segundos = 0;
+        }
+        //Balas T2:
+        if (segundos >= 3 && segundos < 5)
+        {
+            renderi.color = new Color(1, 1, 1, 1);
+            if (renderi.flipX == false)
+            {
+                Disparos(1, true, bulletT2);
+                ChangeAnimation(ANIMATION_DISPARAR);
+            }
+            else
+            {
+                Disparos(-1, false, bulletT2);
+                ChangeAnimation(ANIMATION_DISPARAR);
+            }
+            tiempoCarga = 0;
+            segundos = 0;
+        }
+        //Balas T3:
+        if (segundos >= 5)
+        {
+            renderi.color = new Color(1, 1, 1, 1);
+            if (renderi.flipX == false)
+            {
+                Disparos(1, true, bulletT3);
+                ChangeAnimation(ANIMATION_DISPARAR);
+            }
+            else
+            {
+                Disparos(-1, false, bulletT3);
+                ChangeAnimation(ANIMATION_DISPARAR);
+            }
+            tiempoCarga = 0;
+            segundos = 0;
+        }
+        cambio = false;
+    }
     void OnCollisionEnter2D(Collision2D other)
     {
         saltos = true;

@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: -4
+  vidas: 3
 --- !u!50 &176131767
 Rigidbody2D:
   serializedVersion: 4
@@ -325,6 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: -4
+  vidas: 3
 --- !u!50 &233367391
 Rigidbody2D:
   serializedVersion: 4
@@ -707,6 +709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: -4
+  vidas: 3
 --- !u!1 &849463158
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,6 +744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: -4
+  vidas: 3
 --- !u!50 &849463160
 Rigidbody2D:
   serializedVersion: 4
@@ -3372,6 +3376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: -4
+  vidas: 3
 --- !u!50 &1185925424
 Rigidbody2D:
   serializedVersion: 4
@@ -4011,6 +4016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: -4
+  vidas: 3
 --- !u!50 &1771956275
 Rigidbody2D:
   serializedVersion: 4
@@ -4179,6 +4185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: -4
+  vidas: 3
 --- !u!50 &1774882564
 Rigidbody2D:
   serializedVersion: 4
@@ -4347,6 +4354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: -4
+  vidas: 3
 --- !u!50 &1835709384
 Rigidbody2D:
   serializedVersion: 4
@@ -4771,6 +4779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: -4
+  vidas: 3
 --- !u!50 &2025395509
 Rigidbody2D:
   serializedVersion: 4
@@ -4939,6 +4948,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: -4
+  vidas: 3
 --- !u!50 &2128852672
 Rigidbody2D:
   serializedVersion: 4
@@ -5082,6 +5092,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4739564216725479470, guid: 39749a86fcd12434eace0186386b3782, type: 3}
       propertyPath: m_Name
+      value: Kunai
+      objectReference: {fileID: 0}
+    - target: {fileID: 4739564216725479470, guid: 39749a86fcd12434eace0186386b3782, type: 3}
+      propertyPath: m_TagString
       value: Kunai
       objectReference: {fileID: 0}
     - target: {fileID: 7239367582036535429, guid: 39749a86fcd12434eace0186386b3782, type: 3}

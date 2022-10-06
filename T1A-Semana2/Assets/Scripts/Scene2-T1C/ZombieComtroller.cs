@@ -35,6 +35,10 @@ public class ZombieComtroller : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        if(other.gameObject.tag == "Kunai")
+        {
+            Destroy(this.gameObject);
+        }
         if(other.gameObject.tag == "Disparo1")
         {
             quitarVidasZombie(1);
